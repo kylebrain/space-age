@@ -9,15 +9,27 @@ public enum PlayerMode { CabinMode, PilotMode, GunnerMode };
 public class Player : MonoBehaviour
 {
     public PlayerMode mode = PlayerMode.CabinMode;
+    public bool onPilot = false;
+    public bool onGunner = false;
     private PlayerInput playerInput;
+
+    private InputActionMap cabinActionMap;
+    private InputActionMap pilotActionMap;
+    private InputActionMap gunnerActionMap;
+    private InputActionMap combatActionMap;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Hello world!");
         playerInput = GetComponent<PlayerInput>();
+        cabinActionMap = playerInput.actions.FindActionMap("Cabin");
+        pilotActionMap = playerInput.actions.FindActionMap("Pilot");
+        gunnerActionMap = playerInput.actions.FindActionMap("Gunner");
+        combatActionMap = playerInput.actions.FindActionMap("Combat");
 
-        playerInput.actions.FindActionMap("Cabin").Enable();
+        cabinActionMap.Enable();
+
         mode = PlayerMode.CabinMode;
     }
 
@@ -29,15 +41,26 @@ public class Player : MonoBehaviour
     /**** Cabin controls ****/
     public void OnInteract()
     {
-        const bool onPilot = true;
-        if(onPilot)
+        string debugString = "Interacted: ";
+        if (onPilot)
         {
-            playerInput.actions.FindActionMap("Cabin").Disable();
-            playerInput.actions.FindActionMap("Pilot").Enable();
-            playerInput.actions.FindActionMap("Combat").Enable();
+            debugString += "Mode switched to Pilot";
+            cabinActionMap.Disable();
+            pilotActionMap.Enable();
+            combatActionMap.Enable();
             mode = PlayerMode.PilotMode;
         }
-        Debug.Log("Interacted");
+
+        if(onGunner)
+        {
+            debugString += "Mode switched to Gunner";
+            cabinActionMap.Disable();
+            gunnerActionMap.Enable();
+            combatActionMap.Enable();
+            mode = PlayerMode.GunnerMode;
+        }
+
+        Debug.Log(debugString);
     }
 
     public void OnMove(InputValue axis)
@@ -65,10 +88,11 @@ public class Player : MonoBehaviour
     /**** Combat controls ****/
     public void OnModeSwitch()
     {
-        playerInput.actions.FindActionMap("Pilot").Disable();
-        playerInput.actions.FindActionMap("Combat").Disable();
-        playerInput.actions.FindActionMap("Cabin").Enable();
+        pilotActionMap.Disable();
+        gunnerActionMap.Disable();
+        combatActionMap.Disable();
+        cabinActionMap.Enable();
         mode = PlayerMode.CabinMode;
-        Debug.Log("Mode swtiched");
+        Debug.Log("Mode switched to Cabin");
     }
 }
