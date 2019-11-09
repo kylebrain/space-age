@@ -3,57 +3,72 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum PlayerMode { CabinMode, PilotMode, GunnerMode };
+
 [RequireComponent(typeof(PlayerInput))]
 public class Player : MonoBehaviour
 {
-
-    public float speed = 2;
-    public float jumpHeight = 5;
-    public float groundedEpisilon = 0.1f;
-
-    bool jumped = false;
-    float move = 0;
-    float distToGround = 0;
-
+    public PlayerMode mode = PlayerMode.CabinMode;
+    private PlayerInput playerInput;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Hello world!");
-        GetComponent<PlayerInput>().actions.actionMaps[0].Enable();
-        distToGround = GetComponent<Collider>().bounds.extents.y;
+        playerInput = GetComponent<PlayerInput>();
+
+        playerInput.actions.FindActionMap("Cabin").Enable();
+        mode = PlayerMode.CabinMode;
     }
 
     void FixedUpdate()
     {
-        if(jumped)
-        {
-            if(IsGrounded())
-            {
-                GetComponent<Rigidbody>().velocity += new Vector3(0, jumpHeight, 0);
-                Debug.Log("kyle BIG gae");
-                Debug.Log("kyle IS gae");
-            }
-            jumped = false;
-        }
 
-        GetComponent<Rigidbody>().velocity += new Vector3(1, 0, 0) * move * speed * Time.fixedDeltaTime;
     }
 
-    public void OnJump()
+    /**** Cabin controls ****/
+    public void OnInteract()
     {
-        Debug.Log("Trying to jump!");
-        jumped = true;
+        const bool onPilot = true;
+        if(onPilot)
+        {
+            playerInput.actions.FindActionMap("Cabin").Disable();
+            playerInput.actions.FindActionMap("Pilot").Enable();
+            playerInput.actions.FindActionMap("Combat").Enable();
+            mode = PlayerMode.PilotMode;
+        }
+        Debug.Log("Interacted");
     }
 
     public void OnMove(InputValue axis)
     {
         Debug.Log("Moved: " + axis.Get());
-        move = (float)axis.Get();
     }
 
-    bool IsGrounded()
+    /**** Pilot controls ****/
+    public void OnSteer(InputValue axis)
     {
-        return Physics.Raycast(transform.position, Vector3.down, distToGround + groundedEpisilon);
+        Debug.Log("Steered: " + axis.Get());
+    }
+
+    /**** Gunner controls ****/
+    public void OnAim(InputValue axis)
+    {
+        Debug.Log("Aim: " + axis.Get());
+    }
+
+    public void OnShoot()
+    {
+        Debug.Log("Shot");
+    }
+
+    /**** Combat controls ****/
+    public void OnModeSwitch()
+    {
+        playerInput.actions.FindActionMap("Pilot").Disable();
+        playerInput.actions.FindActionMap("Combat").Disable();
+        playerInput.actions.FindActionMap("Cabin").Enable();
+        mode = PlayerMode.CabinMode;
+        Debug.Log("Mode swtiched");
     }
 }
