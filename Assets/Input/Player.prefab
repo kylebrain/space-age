@@ -170,6 +170,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c4fc558713dc3542b9215f725ca9847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  jumpHeight: 5
-  groundedEpisilon: 0.01
+  cabin:
+    m_Name: Cabin
+    m_Id: 54c1b01c-3fda-439f-8eba-1f86297cd152
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
+  pilot:
+    m_Name: Pilot
+    m_Id: 2013f7b9-7196-4ae8-8c94-883706fff0ea
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
+  gunner:
+    m_Name: Gunner
+    m_Id: bdceac07-7225-4159-b380-4fd7a576cb01
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
+  combat:
+    m_Name: Combat
+    m_Id: 3d52b735-ff69-4da8-9ac0-01099804572c
+    m_Asset: {fileID: 0}
+    m_Actions: []
+    m_Bindings: []
