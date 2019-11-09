@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
             if(IsGrounded())
             {
                 GetComponent<Rigidbody>().velocity += new Vector3(0, jumpHeight, 0);
-                Debug.Log("kyle gae");
+                Debug.Log("kyle BIG gae");
                 Debug.Log("kyle IS gae");
             }
             jumped = false;
