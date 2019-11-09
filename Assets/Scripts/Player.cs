@@ -6,54 +6,98 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class Player : MonoBehaviour
 {
+    public PlayerMode mode = PlayerMode.CabinMode;
+    public bool onPilot = false;
+    public bool onGunner = false;
+    public float cabinSpeed = 40;
+    private PlayerInput playerInput;
 
-    public float speed = 2;
-    public float jumpHeight = 5;
-    public float groundedEpisilon = 0.1f;
+    private InputActionMap cabinActionMap;
+    private InputActionMap pilotActionMap;
+    private InputActionMap gunnerActionMap;
+    private InputActionMap combatActionMap;
 
-    bool jumped = false;
-    float move = 0;
-    float distToGround = 0;
-
+    private Vector2 cabinMove = Vector2.zero;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Hello world!");
-        GetComponent<PlayerInput>().actions.actionMaps[0].Enable();
-        distToGround = GetComponent<Collider>().bounds.extents.y;
+        playerInput = GetComponent<PlayerInput>();
+        cabinActionMap = playerInput.actions.FindActionMap("Cabin");
+        pilotActionMap = playerInput.actions.FindActionMap("Pilot");
+        gunnerActionMap = playerInput.actions.FindActionMap("Gunner");
+        combatActionMap = playerInput.actions.FindActionMap("Combat");
+
+        cabinActionMap.Enable();
+
+        mode = PlayerMode.CabinMode;
     }
 
     void FixedUpdate()
     {
-        if(jumped)
-        {
-            if(IsGrounded())
-            {
-                GetComponent<Rigidbody>().velocity += new Vector3(0, jumpHeight, 0);
-                Debug.Log("kyle BIG gae");
-                Debug.Log("kyle IS gae");
-            }
-            jumped = false;
-        }
-
-        GetComponent<Rigidbody>().velocity += new Vector3(1, 0, 0) * move * speed * Time.fixedDeltaTime;
+        transform.position += new Vector3(cabinMove.x, 0, cabinMove.y) * cabinSpeed * Time.fixedDeltaTime;
     }
 
-    public void OnJump()
+    /**** Cabin controls ****/
+    public void OnInteract()
     {
-        Debug.Log("Trying to jump!");
-        jumped = true;
+        string debugString = "Interacted: ";
+        if (onPilot)
+        {
+            debugString += "Mode switched to Pilot";
+            cabinActionMap.Disable();
+            pilotActionMap.Enable();
+            combatActionMap.Enable();
+            mode = PlayerMode.PilotMode;
+            ModeManager.ModeSwitch(this, PlayerMode.PilotMode);
+        }
+
+        if (onGunner)
+        {
+            debugString += "Mode switched to Gunner";
+            cabinActionMap.Disable();
+            gunnerActionMap.Enable();
+            combatActionMap.Enable();
+            mode = PlayerMode.GunnerMode;
+            ModeManager.ModeSwitch(this, PlayerMode.GunnerMode);
+        }
+
+        Debug.Log(debugString);
     }
 
     public void OnMove(InputValue axis)
     {
         Debug.Log("Moved: " + axis.Get());
-        move = (float)axis.Get();
+        cabinMove = (Vector2) axis.Get();
     }
 
-    bool IsGrounded()
+    /**** Pilot controls ****/
+    public void OnSteer(InputValue axis)
     {
-        return Physics.Raycast(transform.position, Vector3.down, distToGround + groundedEpisilon);
+        Debug.Log("Steered: " + axis.Get());
+    }
+
+    /**** Gunner controls ****/
+    public void OnAim(InputValue axis)
+    {
+        Debug.Log("Aim: " + axis.Get());
+    }
+
+    public void OnShoot()
+    {
+        Debug.Log("Shot");
+    }
+
+    /**** Combat controls ****/
+    public void OnModeSwitch()
+    {
+        pilotActionMap.Disable();
+        gunnerActionMap.Disable();
+        combatActionMap.Disable();
+        cabinActionMap.Enable();
+        mode = PlayerMode.CabinMode;
+        Debug.Log("Mode switched to Cabin");
+        ModeManager.ModeSwitch(this, PlayerMode.CabinMode);
     }
 }
