@@ -1,23 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SubsystemManager : MonoBehaviour
+public static class SubsystemManager
 {
-    private ShieldManager shieldSystem;
-    private WeaponsManager weaponSystem;
-    private NavigationManager navigationSystem;
+    public static int shieldHealth = 100;
+    public static int weaponHealth = 100;
+    public static int navigationHealth = 100;
+    public static int mainHealth = 200;
+    
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
