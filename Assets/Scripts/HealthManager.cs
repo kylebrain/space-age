@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubsystemManager : MonoBehaviour
+public class NewBehaviourScript : MonoBehaviour
 {
-    private ShieldManager shieldSystem;
-    private WeaponsManager weaponSystem;
-    private NavigationManager navigationSystem;
-
-
     // Start is called before the first frame update
     void Start()
     {
