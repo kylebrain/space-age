@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayerMode { CabinMode, PilotMode, GunnerMode };
+
 public class ModeManager : MonoBehaviour
 {
 
-    public void ModeSwitch(Player player, PlayerMode playerMode)
+    public static void ModeSwitch(Player player, PlayerMode playerMode)
     {
         SpriteRenderer sprite = player.GetComponent<SpriteRenderer>();
         switch (playerMode)

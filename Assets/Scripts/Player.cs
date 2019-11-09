@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum PlayerMode { CabinMode, PilotMode, GunnerMode };
-
 [RequireComponent(typeof(PlayerInput))]
 public class Player : MonoBehaviour
 {
@@ -49,15 +47,17 @@ public class Player : MonoBehaviour
             pilotActionMap.Enable();
             combatActionMap.Enable();
             mode = PlayerMode.PilotMode;
+            ModeManager.ModeSwitch(this, PlayerMode.PilotMode);
         }
 
-        if(onGunner)
+        if (onGunner)
         {
             debugString += "Mode switched to Gunner";
             cabinActionMap.Disable();
             gunnerActionMap.Enable();
             combatActionMap.Enable();
             mode = PlayerMode.GunnerMode;
+            ModeManager.ModeSwitch(this, PlayerMode.GunnerMode);
         }
 
         Debug.Log(debugString);
@@ -94,5 +94,6 @@ public class Player : MonoBehaviour
         cabinActionMap.Enable();
         mode = PlayerMode.CabinMode;
         Debug.Log("Mode switched to Cabin");
+        ModeManager.ModeSwitch(this, PlayerMode.CabinMode);
     }
 }
