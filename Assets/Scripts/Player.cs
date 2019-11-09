@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public PlayerMode mode = PlayerMode.CabinMode;
     public bool onPilot = false;
     public bool onGunner = false;
+    //public Pilot pilot;
     private PlayerInput playerInput;
 
     private InputActionMap cabinActionMap;
@@ -71,7 +72,10 @@ public class Player : MonoBehaviour
     /**** Pilot controls ****/
     public void OnSteer(InputValue axis)
     {
-        Debug.Log("Steered: " + axis.Get());
+        //Debug.Log("Steered: " + axis.Get());
+        //Debug.Log("SteeredX: " + ((Vector2)axis.Get()).x);
+        //Debug.Log("SteeredY: " + ().y);
+        Pilot.Move((Vector2)axis.Get());
     }
 
     /**** Gunner controls ****/
