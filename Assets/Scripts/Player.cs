@@ -9,12 +9,15 @@ public class Player : MonoBehaviour
     public PlayerMode mode = PlayerMode.CabinMode;
     public bool onPilot = false;
     public bool onGunner = false;
+    public float cabinSpeed = 40;
     private PlayerInput playerInput;
 
     private InputActionMap cabinActionMap;
     private InputActionMap pilotActionMap;
     private InputActionMap gunnerActionMap;
     private InputActionMap combatActionMap;
+
+    private Vector2 cabinMove = Vector2.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +36,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        transform.position += new Vector3(cabinMove.x, 0, cabinMove.y) * cabinSpeed * Time.fixedDeltaTime;
     }
 
     /**** Cabin controls ****/
@@ -66,6 +69,7 @@ public class Player : MonoBehaviour
     public void OnMove(InputValue axis)
     {
         Debug.Log("Moved: " + axis.Get());
+        cabinMove = (Vector2) axis.Get();
     }
 
     /**** Pilot controls ****/
