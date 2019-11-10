@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
     public PlayerMode mode = PlayerMode.CabinMode;
@@ -11,6 +12,8 @@ public class Player : MonoBehaviour
     public bool onGunner = false;
     public float cabinSpeed = 40;
     private PlayerInput playerInput;
+
+    private Rigidbody rigidbody;
 
     private InputActionMap cabinActionMap;
     private InputActionMap pilotActionMap;
@@ -24,6 +27,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Hello world!");
         playerInput = GetComponent<PlayerInput>();
+        rigidbody = GetComponent<Rigidbody>();
         cabinActionMap = playerInput.actions.FindActionMap("Cabin");
         pilotActionMap = playerInput.actions.FindActionMap("Pilot");
         gunnerActionMap = playerInput.actions.FindActionMap("Gunner");
@@ -36,7 +40,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position += new Vector3(cabinMove.x, 0, cabinMove.y) * cabinSpeed * Time.fixedDeltaTime;
+        rigidbody.velocity = new Vector3(cabinMove.x, 0, cabinMove.y) * cabinSpeed * Time.fixedDeltaTime;
     }
 
     /**** Cabin controls ****/
