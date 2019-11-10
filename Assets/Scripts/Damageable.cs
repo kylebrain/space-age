@@ -3,28 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Damageable : MonoBehaviour
+public abstract class Damageable : MonoBehaviour
 {
-    public int health;
-    public int maxHealth = 100;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        health = maxHealth;
-    }
+    protected abstract void DealDamage(int damageAmount);
 
     private void OnTriggerEnter(Collider other)
     {
         Weapon weapon = other.GetComponent<Weapon>();
-        if (weapon != null)
+        if (weapon != null && weapon.caster != this)
         {
-            health -= weapon.damageAmount;
+            DealDamage(weapon.damageAmount);
             Destroy(other.gameObject);
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
         }
     }
 }

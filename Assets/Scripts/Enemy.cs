@@ -55,7 +55,8 @@ public class Enemy : MonoBehaviour
                 fireAccumulator -= 1f / fireRate;
                 if (Mathf.Abs(angleDiff) <= 4)
                 {
-                    Instantiate(laser, gunPosition.position, Quaternion.LookRotation(transform.up, Vector3.up));
+                    Laser newLaser = Instantiate(laser, gunPosition.position, Quaternion.LookRotation(transform.up, Vector3.up));
+                    newLaser.GetComponent<Weapon>().caster = GetComponent<Damageable>();
                 }
             }
         }

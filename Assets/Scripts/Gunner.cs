@@ -63,7 +63,8 @@ public class Gunner : MonoBehaviour
                 {
                     shotPos = new Vector3(gunner.input.x, 0, gunner.input.y);
                 }
-                Instantiate(gunner.laser, gunner.gunPosition.position, Quaternion.LookRotation(shotPos, Vector3.up));
+                Laser laser = Instantiate(gunner.laser, gunner.gunPosition.position, Quaternion.LookRotation(shotPos, Vector3.up));
+                laser.GetComponent<Weapon>().caster = gunner.GetComponent<Damageable>();
             }
             fireTimer = 0;
         }
