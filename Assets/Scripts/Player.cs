@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
 
         if (onShield)
         {
-            Debug.Log("OnShield");
+            //Debug.Log("OnShield");
             if (SubsystemManager.shieldHealth < 99)
             {
                 SubsystemManager.shieldHealth += 2;
@@ -85,12 +85,12 @@ public class Player : MonoBehaviour
             {
                 SubsystemManager.shieldHealth = 100;
             }
-            Debug.Log(SubsystemManager.shieldHealth);
+            //Debug.Log(SubsystemManager.shieldHealth);
         }
 
         if (onWeapons)
         {
-            Debug.Log("OnWeapons");
+            //Debug.Log("OnWeapons");
             if (SubsystemManager.weaponHealth < 99)
             {
                 SubsystemManager.weaponHealth += 2;
@@ -100,12 +100,12 @@ public class Player : MonoBehaviour
             {
                 SubsystemManager.weaponHealth = 100;
             }
-            Debug.Log(SubsystemManager.weaponHealth);
+            //Debug.Log(SubsystemManager.weaponHealth);
         }
 
         if (onNavigation)
         {
-            Debug.Log("OnNav");
+            //Debug.Log("OnNav");
             if (SubsystemManager.navigationHealth < 99)
             {
                 SubsystemManager.navigationHealth += 2;
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
             {
                 SubsystemManager.navigationHealth = 100;
             }
-            Debug.Log(SubsystemManager.navigationHealth);
+            //Debug.Log(SubsystemManager.navigationHealth);
         }
         //Debug.Log(debugString);
     }

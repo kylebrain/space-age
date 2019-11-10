@@ -38,8 +38,22 @@ public class Pilot : MonoBehaviour
     {
         speed += input.y * acceleration * Time.fixedDeltaTime;
         speed = Mathf.Clamp(speed, minSpeed, maxSpeed);
-        instance.transform.position += instance.transform.up * Time.fixedDeltaTime * speed;
-        instance.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime);
+        if (SubsystemManager.navigationHealth > 75)
+        {
+            instance.transform.position += instance.transform.up * Time.fixedDeltaTime * speed;
+            instance.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime);
+        }
+        else if (SubsystemManager.navigationHealth > 50)
+        {
+            instance.transform.position += instance.transform.up * Time.fixedDeltaTime * speed * 0.75f;
+            instance.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime * 0.75f);
+        }
+        else if (SubsystemManager.navigationHealth > 0)
+        {
+            instance.transform.position += instance.transform.up * Time.fixedDeltaTime * speed * 0.5f;
+            instance.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime * 0.5f);
+        }
+
         PilotCamera.transform.position = new Vector3(instance.transform.position.x, PilotCamera.transform.position.y, instance.transform.position.z);
         CombatBackground.transform.position = new Vector3(instance.transform.position.x, CombatBackground.transform.position.y, instance.transform.position.z);
         float scrollScalar = 500f;
