@@ -47,12 +47,12 @@ public class Pilot : MonoBehaviour
         else if (SubsystemManager.navigationHealth > 50)
         {
             instance.transform.position += instance.transform.up * Time.fixedDeltaTime * speed * 0.75f;
-            instance.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime * 0.75f);
+            instance.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime * 0.9f);
         }
         else if (SubsystemManager.navigationHealth > 0)
         {
             instance.transform.position += instance.transform.up * Time.fixedDeltaTime * speed * 0.5f;
-            instance.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime * 0.5f);
+            instance.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime * 0.75f);
         }
 
         PilotCamera.transform.position = new Vector3(instance.transform.position.x, PilotCamera.transform.position.y, instance.transform.position.z);

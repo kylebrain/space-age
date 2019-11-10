@@ -25,7 +25,7 @@ public class UserDamageManager : MonoBehaviour
     public const int weaponsChance = 1;
     public const int navigationChance = 2;
 
-    public const int criticalChance = 6; //(int)((int)9 / .05);
+    public const int criticalChance = 60; //(int)((int)9 / .05);
     public const int criticalDamage = 20;
 
 
