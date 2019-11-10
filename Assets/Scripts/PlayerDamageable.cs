@@ -6,6 +6,6 @@ public class PlayerDamageable : Damageable
 {
     protected override void DealDamage(int damageAmount)
     {
-        UserDamageManager.OnHit();
+        UserDamageManager.OnHit(damageAmount);
     }
 }
