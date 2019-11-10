@@ -37,7 +37,6 @@ public class StatusBarController : MonoBehaviour
                 bar.value = SubsystemManager.mainHealth;
                 break;
         }
-
     }
 
     
