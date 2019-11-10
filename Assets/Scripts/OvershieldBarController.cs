@@ -5,53 +5,38 @@ using UnityEngine.UI;
 
 public class OvershieldBarController : MonoBehaviour
 {
-
-    public Slider bar1;
-    public Slider bar2;
-    public Slider bar3;
-    public Slider bar4;
-    public Slider bar5;
+    public Slider []barArray = new Slider [5];
 
     public float time = 0;
+
+    public int overshieldIncrement = 10;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        bar1.value = SubsystemManager.overshieldHealth1;
-        bar2.value = SubsystemManager.overshieldHealth2;
-        bar3.value = SubsystemManager.overshieldHealth3;
-        bar4.value = SubsystemManager.overshieldHealth4;
-        bar5.value = SubsystemManager.overshieldHealth5;
+        int temp = SubsystemManager.overshieldHealth;
 
-        if (SubsystemManager.overshieldHealth1 < 0)
-        {
-            SubsystemManager.overshieldHealth1 = 0;
-        }
+        int i = 0;
 
-        if (SubsystemManager.overshieldHealth2 < 0)
+        // while less than barArray size
+        for (i = 0; i < 5; i++)
         {
-            SubsystemManager.overshieldHealth2 = 0;
-        }
+            if (temp > overshieldIncrement)
+            {
+                barArray[i].value = overshieldIncrement;
+                temp -= overshieldIncrement;
+            }
 
-        if (SubsystemManager.overshieldHealth3 < 0)
-        {
-            SubsystemManager.overshieldHealth3 = 0;
-        }
-
-        if (SubsystemManager.overshieldHealth4 < 0)
-        {
-            SubsystemManager.overshieldHealth4 = 0;
-        }
-
-        if (SubsystemManager.overshieldHealth5 < 0)
-        {
-            SubsystemManager.overshieldHealth5 = 0;
+            else
+            {
+                barArray[i].value = temp;
+                temp = 0;
+            }
         }
 
         time += Time.deltaTime;
@@ -60,32 +45,8 @@ public class OvershieldBarController : MonoBehaviour
         {
             time -= 1;
 
-            if (SubsystemManager.overshieldHealth1 < 20)
-            {
-                SubsystemManager.overshieldHealth1++;
-            }
-
-            else if (SubsystemManager.overshieldHealth2 < 20)
-            {
-                SubsystemManager.overshieldHealth2++;
-            }
-
-            else if (SubsystemManager.overshieldHealth3 < 20)
-            {
-                SubsystemManager.overshieldHealth3++;
-            }
-
-            else if (SubsystemManager.overshieldHealth4 < 20)
-            {
-                SubsystemManager.overshieldHealth4++;
-            }
-
-            else if (SubsystemManager.overshieldHealth5 < 20)
-            {
-                SubsystemManager.overshieldHealth5++;
-            }
+            SubsystemManager.overshieldHealth += 2;
         }
-
         
     }
 }

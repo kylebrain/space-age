@@ -186,6 +186,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  damageAmount: 5
+  caster: {fileID: 0}
 --- !u!1 &3587926907522597595
 GameObject:
   m_ObjectHideFlags: 0
