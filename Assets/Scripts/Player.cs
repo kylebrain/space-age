@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     private InputActionMap gunnerActionMap;
     private InputActionMap combatActionMap;
     private PlayerAnimation animationUpdate;
-    public LogoToggle toggleLogos;
 
     void Start()
     {

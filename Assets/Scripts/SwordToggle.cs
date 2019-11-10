@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwordToggle : MonoBehaviour
 {
     SpriteRenderer m_SpriteRenderer;
+    //AudioSource audioSource;
     Color32 transparent = new Color32(35, 238, 47, 130);
     Color32 bright = new Color32(35, 238, 47, 255);
 
@@ -12,6 +13,7 @@ public class SwordToggle : MonoBehaviour
     void Start()
     {
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        //audioSource = GetComponent<AudioSource>();
         m_SpriteRenderer.color = transparent;
 
     }
@@ -25,6 +27,7 @@ public class SwordToggle : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         m_SpriteRenderer.color = bright;
+        //audioSource.Play();
     }
 
     void OnTriggerExit(Collider collision)
