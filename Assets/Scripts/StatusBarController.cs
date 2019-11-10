@@ -126,7 +126,7 @@ public class StatusBarController : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    if (SubsystemManager.mainHealth < 100)
+                    if (SubsystemManager.mainHealth < 200)
                     {
                         SubsystemManager.mainHealth++;
                         Debug.Log("plus 1");
