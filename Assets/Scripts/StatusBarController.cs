@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum StatusType { ShieldType, WeaponType, NavigationType, HealthType, OvershieldType };
+public enum StatusType { ShieldType, WeaponType, NavigationType, HealthType };
 
 public class StatusBarController : MonoBehaviour
 {
@@ -35,10 +35,6 @@ public class StatusBarController : MonoBehaviour
 
             case StatusType.HealthType:
                 bar.value = SubsystemManager.mainHealth;
-                break;
-
-            case StatusType.OvershieldType:
-                bar.value = SubsystemManager.overshieldHealth1;
                 break;
         }
     }
