@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     public PlayerMode mode = PlayerMode.CabinMode;
     public bool onPilot = false;
     public bool onGunner = false;
+    public bool onShield = false;
+    public bool onWeapons = false;
+    public bool onNavigation = false;
     public float cabinSpeed = 2000;
     private Rigidbody playerRigidbody;
     private Vector2 cabinMove = Vector2.zero;
@@ -68,6 +71,50 @@ public class Player : MonoBehaviour
             ModeManager.ModeSwitch(this, PlayerMode.GunnerMode);
         }
 
+        if (onShield)
+        {
+            Debug.Log("OnShield");
+            if (SubsystemManager.shieldHealth < 99)
+            {
+                SubsystemManager.shieldHealth += 2;
+            }
+
+            else
+            {
+                SubsystemManager.shieldHealth = 100;
+            }
+            Debug.Log(SubsystemManager.shieldHealth);
+        }
+
+        if (onWeapons)
+        {
+            Debug.Log("OnWeapons");
+            if (SubsystemManager.weaponHealth < 99)
+            {
+                SubsystemManager.weaponHealth += 2;
+            }
+
+            else
+            {
+                SubsystemManager.weaponHealth = 100;
+            }
+            Debug.Log(SubsystemManager.weaponHealth);
+        }
+
+        if (onNavigation)
+        {
+            Debug.Log("OnNav");
+            if (SubsystemManager.navigationHealth < 99)
+            {
+                SubsystemManager.navigationHealth += 2;
+            }
+
+            else
+            {
+                SubsystemManager.navigationHealth = 100;
+            }
+            Debug.Log(SubsystemManager.navigationHealth);
+        }
         //Debug.Log(debugString);
     }
 
@@ -116,6 +163,20 @@ public class Player : MonoBehaviour
         {
             onGunner = true;
         }
+        else if (other.gameObject.name == "ShieldCollider")
+        {
+            onShield = true;
+        }
+
+        else if (other.gameObject.name == "WeaponsCollider")
+        {
+            onWeapons = true;
+        }
+
+        else if (other.gameObject.name == "NavigationCollider")
+        {
+            onNavigation = true;
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -127,6 +188,20 @@ public class Player : MonoBehaviour
         else if (other.gameObject.name == "GunnerCollider")
         {
             onGunner = false;
+        }
+        else if (other.gameObject.name == "ShieldCollider")
+        {
+            onShield = false;
+        }
+
+        else if (other.gameObject.name == "WeaponsCollider")
+        {
+            onWeapons = false;
+        }
+
+        else if (other.gameObject.name == "NavigationCollider")
+        {
+            onNavigation = false;
         }
     }
 }
