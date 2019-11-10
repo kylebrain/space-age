@@ -17,7 +17,7 @@ public class EnemyDamageable : Damageable
         health = maxHealth;
     }
 
-    protected override void DealDamage(int damageAmount)
+    protected override void DealDamage(int damageAmount, Damageable casted)
     {
         health -= damageAmount;
         if (health <= 0)
@@ -31,7 +31,11 @@ public class EnemyDamageable : Damageable
                 }
             }
 
-            SubsystemManager.score += killScore;
+            if(casted != null && casted.GetComponent<EnemyDamageable>() == null)
+            {
+                SubsystemManager.score += killScore;
+            }
+
             gameObject.GetComponent<Renderer>().enabled = false;
             Destroy(this);
             Destroy(gameObject, 1.0f);

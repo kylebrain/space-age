@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDamageable : Damageable
 {
-    protected override void DealDamage(int damageAmount)
+    protected override void DealDamage(int damageAmount, Damageable casted)
     {
         UserDamageManager.OnHit(damageAmount);
     }
