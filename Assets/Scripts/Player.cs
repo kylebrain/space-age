@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     public float cabinSpeed = 2000;
     private Rigidbody playerRigidbody;
     private Vector2 cabinMove = Vector2.zero;
-    //public Pilot pilot;
     private PlayerInput playerInput;
 
     private InputActionMap cabinActionMap;
@@ -21,10 +20,10 @@ public class Player : MonoBehaviour
     private InputActionMap gunnerActionMap;
     private InputActionMap combatActionMap;
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        Debug.Log("Hello world!");
+        //Debug.Log("Hello world!");
         playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody>();
         cabinActionMap = playerInput.actions.FindActionMap("Cabin");
@@ -66,33 +65,30 @@ public class Player : MonoBehaviour
             ModeManager.ModeSwitch(this, PlayerMode.GunnerMode);
         }
 
-        Debug.Log(debugString);
+        //Debug.Log(debugString);
     }
 
     public void OnMove(InputValue axis)
     {
-        Debug.Log("Moved: " + axis.Get());
+        //Debug.Log("Moved: " + axis.Get());
         cabinMove = (Vector2)axis.Get();
     }
 
     /**** Pilot controls ****/
     public void OnSteer(InputValue axis)
     {
-        //Debug.Log("Steered: " + axis.Get());
-        //Debug.Log("SteeredX: " + ((Vector2)axis.Get()).x);
-        //Debug.Log("SteeredY: " + ().y);
         Pilot.Move((Vector2)axis.Get());
     }
 
     /**** Gunner controls ****/
     public void OnAim(InputValue axis)
     {
-        Debug.Log("Aim: " + axis.Get());
+        //Debug.Log("Aim: " + axis.Get());
     }
 
     public void OnShoot()
     {
-        Debug.Log("Shot");
+        //Debug.Log("Shot");
     }
 
     /**** Combat controls ****/
@@ -103,7 +99,31 @@ public class Player : MonoBehaviour
         combatActionMap.Disable();
         cabinActionMap.Enable();
         mode = PlayerMode.CabinMode;
-        Debug.Log("Mode switched to Cabin");
+        //Debug.Log("Mode switched to Cabin");
         ModeManager.ModeSwitch(this, PlayerMode.CabinMode);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "PilotCollider")
+        {
+            onPilot = true;
+        }
+        else if (other.gameObject.name == "GunnerCollider")
+        {
+            onGunner = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "PilotCollider")
+        {
+            onPilot = false;
+        }
+        else if (other.gameObject.name == "GunnerCollider")
+        {
+            onGunner = false;
+        }
     }
 }
