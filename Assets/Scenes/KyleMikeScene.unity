@@ -1483,7 +1483,6 @@ GameObject:
   m_Component:
   - component: {fileID: 260757233}
   - component: {fileID: 260757232}
-  - component: {fileID: 260757231}
   m_Layer: 0
   m_Name: CombatCamera
   m_TagString: MainCamera
@@ -1491,14 +1490,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &260757231
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260757230}
-  m_Enabled: 1
 --- !u!20 &260757232
 Camera:
   m_ObjectHideFlags: 0
@@ -4485,7 +4476,6 @@ MonoBehaviour:
   PilotCamera: {fileID: 260757232}
   CombatBackground: {fileID: 1434455811}
   terrainManager: {fileID: 37976976}
-  player: {fileID: 0}
   speed: 10
 --- !u!114 &1194648115
 MonoBehaviour:
@@ -4501,7 +4491,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laser: {fileID: 1233337821479964338, guid: 60cef46608cec454882c6bd51424a795, type: 3}
   gunPosition: {fileID: 341312555}
-  player: {fileID: 0}
 --- !u!136 &1194648116
 CapsuleCollider:
   m_ObjectHideFlags: 0

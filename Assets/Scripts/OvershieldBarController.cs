@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class OvershieldBarController : MonoBehaviour
 {
-    public Slider []barArray = new Slider [5];
+    public Slider[] barArray = new Slider[5];
 
     public float time = 0;
 
@@ -21,10 +21,14 @@ public class OvershieldBarController : MonoBehaviour
     {
         int temp = SubsystemManager.overshieldHealth;
 
+        int activeOvershields = GetActiveOvershieldCount();
+
+
+
         int i = 0;
 
         // while less than barArray size
-        for (i = 0; i < 5; i++)
+        for (i = 0; i < activeOvershields; i++)
         {
             if (temp > overshieldIncrement)
             {
@@ -47,6 +51,56 @@ public class OvershieldBarController : MonoBehaviour
 
             SubsystemManager.overshieldHealth += 2;
         }
-        
+
+    }
+
+    public int GetActiveOvershieldCount()
+    {
+        if (SubsystemManager.shieldHealth >= 80)
+        {
+            return 5;
+        }
+
+        else if (SubsystemManager.shieldHealth >= 60)
+        {
+            barArray[4].value = 0;
+            //SubsystemManager.overshieldHealth = (int)(.8 * SubsystemManager.maxOvershield);
+            return 4;
+        }
+
+        else if (SubsystemManager.shieldHealth >= 40)
+        {
+            barArray[4].value = 0;
+            barArray[3].value = 0;
+            return 3;
+        }
+
+        else if (SubsystemManager.shieldHealth >= 20)
+        {
+            barArray[4].value = 0;
+            barArray[3].value = 0;
+            barArray[2].value = 0;
+            return 2;
+        }
+
+        else if (SubsystemManager.shieldHealth > 0)
+        {
+            barArray[4].value = 0;
+            barArray[3].value = 0;
+            barArray[2].value = 0;
+            barArray[1].value = 0;
+            return 1;
+        }
+
+        else
+        {
+            //Debug.Log("0");
+            barArray[4].value = 0;
+            barArray[3].value = 0;
+            barArray[2].value = 0;
+            barArray[1].value = 0;
+            barArray[0].value = 0;
+            return 0;
+        }
     }
 }
