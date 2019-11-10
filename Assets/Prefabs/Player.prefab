@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6850125623079851944}
   - component: {fileID: 6003348923853826731}
   - component: {fileID: 4405485472326046773}
+  - component: {fileID: -9181279461645579201}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4344197025588287696}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -1000, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,12 +74,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0356a8ae29b568e42accfe0018b9f132, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 809a4a84b932f114b9f434828cba20b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.28, y: 7.24}
+  m_Size: {x: 2.6, y: 2.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -126,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 0
   onPilot: 0
+  flipped: 0
   onGunner: 0
   cabinSpeed: 2000
 --- !u!136 &6003348923853826731
@@ -158,3 +160,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-9181279461645579201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4344197025588287696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 232fff06ccdf79246be762e6fffffdfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipped: 0

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerAnimation))]
 public class Player : MonoBehaviour
 {
     public PlayerMode mode = PlayerMode.CabinMode;
@@ -14,18 +15,18 @@ public class Player : MonoBehaviour
     private Rigidbody playerRigidbody;
     private Vector2 cabinMove = Vector2.zero;
     private PlayerInput playerInput;
-
     private InputActionMap cabinActionMap;
     private InputActionMap pilotActionMap;
     private InputActionMap gunnerActionMap;
     private InputActionMap combatActionMap;
-
+    private PlayerAnimation animationUpdate;
 
     void Start()
     {
         //Debug.Log("Hello world!");
         playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody>();
+        animationUpdate = GetComponent<PlayerAnimation>();
         cabinActionMap = playerInput.actions.FindActionMap("Cabin");
         pilotActionMap = playerInput.actions.FindActionMap("Pilot");
         gunnerActionMap = playerInput.actions.FindActionMap("Gunner");
@@ -75,6 +76,9 @@ public class Player : MonoBehaviour
     {
         //Debug.Log("Moved: " + axis.Get());
         cabinMove = (Vector2)axis.Get();
+        animationUpdate.move(cabinMove);
+        //Debug.Log("cabinmove " + cabinMove);
+
     }
 
     /**** Pilot controls ****/
