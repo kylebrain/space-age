@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Gunner : MonoBehaviour
 {
-    AudioSource audioSource;
     public Laser laser;
     public Transform gunPosition;
     static Gunner gunner = null;
@@ -22,7 +21,6 @@ public class Gunner : MonoBehaviour
 
     public static void Shoot(bool shooting)
     {
-        //audioSource.Play();
         gunner.isShooting = shooting;
     }
 
@@ -54,7 +52,6 @@ public class Gunner : MonoBehaviour
     private void Awake()
     {
         // currently a singleton, but can change if there can be more than one gunner
-        audioSource = GetComponent<AudioSource>();
         if (gunner == null)
         {
             gunner = this;
