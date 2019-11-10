@@ -8,7 +8,13 @@ public static class SubsystemManager
     public static int shieldHealth = 100;
     public static int weaponHealth = 100;
     public static int navigationHealth = 100;
-    public static int mainHealth = 200;
+    public static int mainHealth = 100;
+    public static int overshieldHealth1 = 0;
+    public static int overshieldHealth2 = 0;
+    public static int overshieldHealth3 = 0;
+    public static int overshieldHealth4 = 0;
+    public static int overshieldHealth5 = 0;
+
 
     // Shield Critical Systems
     public const int fieldGenerator = 0;
