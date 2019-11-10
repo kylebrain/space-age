@@ -21,6 +21,14 @@ public class UserDamageManager : MonoBehaviour
     public const int hyperdriveGenerator = 7;
     public const int inertialDampeners = 8;
 
+    public const int shieldChance = 0;
+    public const int weaponsChance = 1;
+    public const int navigationChance = 2;
+
+    public const int criticalChance = (int)((int)9 / .05);
+
+
+
     public int collisionDamage = 10;
 
     // Start is called before the first frame update
@@ -37,6 +45,23 @@ public class UserDamageManager : MonoBehaviour
     public static void OnHit(int damageAmount)
     {
         // Regular Damage
+
+        int roll = Random.Range(0, 2);
+
+        switch (roll)
+        {
+            case shieldChance:
+                SubsystemManager.shieldHealth -= damageAmount;
+                break;
+
+            case weaponsChance:
+                SubsystemManager.weaponHealth -= damageAmount;
+                break;
+
+            case navigationChance:
+                SubsystemManager.navigationHealth -= damageAmount;
+                break;
+        }
 
         if (SubsystemManager.overshieldHealth > 0)
         {
@@ -59,8 +84,8 @@ public class UserDamageManager : MonoBehaviour
         }
 
         // Critical Hit System
-        int criticalChance = (int)((int)9 / .05);
-        int roll = Random.Range(0, criticalChance);
+        
+        roll = Random.Range(0, criticalChance);
 
         switch (roll)
         {
