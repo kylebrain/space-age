@@ -8,8 +8,8 @@ public static class SubsystemManager
     public static int shieldHealth = 100;
     public static int weaponHealth = 100;
     public static int navigationHealth = 100;
-    public static int mainHealth = 100;
-    public static int overshieldHealth = 100;
+    public static int mainHealth = 200;
+    public static int overshieldHealth = 50;
 
 
     // Shield Critical Systems

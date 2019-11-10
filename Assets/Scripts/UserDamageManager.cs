@@ -21,6 +21,8 @@ public class UserDamageManager : MonoBehaviour
     public const int hyperdriveGenerator = 7;
     public const int inertialDampeners = 8;
 
+    public int collisionDamage = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -149,7 +151,7 @@ public class UserDamageManager : MonoBehaviour
     {
         if (other.GetComponent<Damageable>() != null)
         {
-            OnHit(9);
+            OnHit(collisionDamage);
             Destroy(other.gameObject);
         }
         

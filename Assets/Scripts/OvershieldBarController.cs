@@ -9,6 +9,8 @@ public class OvershieldBarController : MonoBehaviour
 
     public float time = 0;
 
+    public int overshieldIncrement = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,10 +26,10 @@ public class OvershieldBarController : MonoBehaviour
         // while less than barArray size
         for (i = 0; i < 5; i++)
         {
-            if (temp > 20)
+            if (temp > overshieldIncrement)
             {
-                barArray[i].value = 20;
-                temp -= 20;
+                barArray[i].value = overshieldIncrement;
+                temp -= overshieldIncrement;
             }
 
             else
