@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TerrainManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class TerrainManager : MonoBehaviour
     float minZ;
     float maxZ;
     Vector3 prevPos;
+    List<GameObject> spawnedTerrain;
+    int maxSpawnedTerrain;
 
     float seed;
 
@@ -28,6 +31,8 @@ public class TerrainManager : MonoBehaviour
         maxZ = CombatCamera.orthographicSize + 20f;
         minZ = -maxZ;
         prevPos = Vector3.zero;
+        spawnedTerrain = new List<GameObject>();
+        maxSpawnedTerrain = 10000;
     }
 
 
@@ -35,7 +40,7 @@ public class TerrainManager : MonoBehaviour
     {
         Vector3 diff = pos - prevPos;
         prevPos = pos;
-        const float density = 0.995f;
+        const int density = 999;
         if (pos.x + CombatCamera.orthographicSize * (16f / 9f) / 2 > maxX)
         {
             maxX += diff.x;
@@ -43,10 +48,15 @@ public class TerrainManager : MonoBehaviour
             for (int i = 0; i < numPoints; ++i)
             {
                 float curZ = Mathf.Lerp(minZ, maxZ, (float)i / numPoints);
-                //if (Mathf.PerlinNoise(seed + maxX, seed + curZ) >= density)
-                if (Random.Range(0f, 1f) >= density)
+                if (Random.Range(0, 1000) >= density)
                 {
-                    Instantiate(AsteroidPrefab, new Vector3(maxX, 0, curZ), Quaternion.Euler(90, Random.Range(-180, 180), 0), TerrainParent.transform);
+                    GameObject cur = Instantiate(AsteroidPrefab, new Vector3(maxX, 0, curZ), Quaternion.Euler(90, Random.Range(-180, 180), 0), TerrainParent.transform);
+                    spawnedTerrain.Add(cur);
+                    while (spawnedTerrain.Count > maxSpawnedTerrain)
+                    {
+                        Destroy(spawnedTerrain.ElementAt(0));
+                        spawnedTerrain.RemoveAt(0);
+                    }
                 }
             }
         }
@@ -57,10 +67,15 @@ public class TerrainManager : MonoBehaviour
             for (int i = 0; i < numPoints; ++i)
             {
                 float curZ = Mathf.Lerp(minZ, maxZ, (float)i / numPoints);
-                //if (Mathf.PerlinNoise(seed + minX, seed + curZ) >= density)
-                if (Random.Range(0f, 1f) >= density)
+                if (Random.Range(0, 1000) >= density)
                 {
-                    Instantiate(AsteroidPrefab, new Vector3(minX, 0, curZ), Quaternion.Euler(90, Random.Range(-180, 180), 0), TerrainParent.transform);
+                    GameObject cur = Instantiate(AsteroidPrefab, new Vector3(minX, 0, curZ), Quaternion.Euler(90, Random.Range(-180, 180), 0), TerrainParent.transform);
+                    spawnedTerrain.Add(cur);
+                    while (spawnedTerrain.Count > maxSpawnedTerrain)
+                    {
+                        Destroy(spawnedTerrain.ElementAt(0));
+                        spawnedTerrain.RemoveAt(0);
+                    }
                 }
             }
         }
@@ -71,10 +86,15 @@ public class TerrainManager : MonoBehaviour
             for (int i = 0; i < numPoints; ++i)
             {
                 float curX = Mathf.Lerp(minX, maxX, (float)i / numPoints);
-                //if (Mathf.PerlinNoise(seed + curX, seed + maxZ) >= density)
-                if (Random.Range(0f, 1f) >= density)
+                if (Random.Range(0, 1000) >= density)
                 {
-                    Instantiate(AsteroidPrefab, new Vector3(curX, 0, maxZ), Quaternion.Euler(90, Random.Range(-180, 180), 0), TerrainParent.transform);
+                    GameObject cur = Instantiate(AsteroidPrefab, new Vector3(curX, 0, maxZ), Quaternion.Euler(90, Random.Range(-180, 180), 0), TerrainParent.transform);
+                    spawnedTerrain.Add(cur);
+                    while (spawnedTerrain.Count > maxSpawnedTerrain)
+                    {
+                        Destroy(spawnedTerrain.ElementAt(0));
+                        spawnedTerrain.RemoveAt(0);
+                    }
                 }
             }
         }
@@ -85,10 +105,15 @@ public class TerrainManager : MonoBehaviour
             for (int i = 0; i < numPoints; ++i)
             {
                 float curX = Mathf.Lerp(minX, maxX, (float)i / numPoints);
-                //if (Mathf.PerlinNoise(seed + curX, seed + minZ) >= density)
-                if (Random.Range(0f, 1f) >= density)
+                if (Random.Range(0, 1000) >= density)
                 {
-                    Instantiate(AsteroidPrefab, new Vector3(curX, 0, minZ), Quaternion.Euler(90, Random.Range(-180, 180), 0), TerrainParent.transform);
+                    GameObject cur = Instantiate(AsteroidPrefab, new Vector3(curX, 0, minZ), Quaternion.Euler(90, Random.Range(-180, 180), 0), TerrainParent.transform);
+                    spawnedTerrain.Add(cur);
+                    while (spawnedTerrain.Count > maxSpawnedTerrain)
+                    {
+                        Destroy(spawnedTerrain.ElementAt(0));
+                        spawnedTerrain.RemoveAt(0);
+                    }
                 }
             }
         }
