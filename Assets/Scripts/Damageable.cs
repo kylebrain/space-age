@@ -20,10 +20,10 @@ public class Damageable : MonoBehaviour
         if (weapon != null)
         {
             health -= weapon.damageAmount;
-            if(health <= 0)
+            Destroy(other.gameObject);
+            if (health <= 0)
             {
                 Destroy(gameObject);
-                Destroy(other.gameObject);
             }
         }
     }
