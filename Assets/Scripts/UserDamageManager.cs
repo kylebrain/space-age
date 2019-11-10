@@ -154,8 +154,12 @@ public class UserDamageManager : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        OnHit();
-        Destroy(other.gameObject);
+        if (other.GetComponent<Damageable>() != null)
+        {
+            OnHit();
+            Destroy(other.gameObject);
+        }
+        
     }
 
     void OnTriggerExit(Collider other)
