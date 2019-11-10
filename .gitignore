@@ -38,3 +38,6 @@ sysinfo.txt
 # Meta Files
 *.meta
 !*.*.meta
+
+# Mac Specific
+.DS_Store
