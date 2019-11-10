@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     public void OnInteract()
     {
         string debugString = "Interacted: ";
-        if (onPilot)
+        if (onPilot && Pilot.instance.player == null)
         {
             debugString += "Mode switched to Pilot";
             cabinActionMap.Disable();
@@ -58,11 +58,12 @@ public class Player : MonoBehaviour
             combatActionMap.Enable();
             mode = PlayerMode.PilotMode;
             cabinMove = Vector2.zero;
+            Pilot.instance.player = this;
 
             ModeManager.ModeSwitch(this, PlayerMode.PilotMode);
         }
 
-        if (onGunner)
+        if (onGunner && Gunner.instance.player == null)
         {
             debugString += "Mode switched to Gunner";
             cabinActionMap.Disable();
@@ -70,6 +71,7 @@ public class Player : MonoBehaviour
             combatActionMap.Enable();
             mode = PlayerMode.GunnerMode;
             cabinMove = Vector2.zero;
+            Gunner.instance.player = this;
             ModeManager.ModeSwitch(this, PlayerMode.GunnerMode);
         }
 
@@ -159,6 +161,11 @@ public class Player : MonoBehaviour
         if (mode == PlayerMode.GunnerMode)
         {
             Gunner.Shoot(false);
+            Gunner.instance.player = null;
+        }
+        else if (mode == PlayerMode.PilotMode)
+        {
+            Pilot.instance.player = null;
         }
 
         mode = PlayerMode.CabinMode;

@@ -8,6 +8,7 @@ public class Pilot : MonoBehaviour
     public Camera PilotCamera;
     public GameObject CombatBackground;
     public TerrainManager terrainManager;
+    public Player player = null;
 
     Vector2 input;
     public float speed = 10.0f;

@@ -7,7 +7,8 @@ public class Gunner : MonoBehaviour
     AudioSource audioSource;
     public Laser laser;
     public Transform gunPosition;
-    static Gunner gunner = null;
+    public static Gunner instance = null;
+    public Player player = null;
 
     Vector2 input;
 
@@ -18,53 +19,57 @@ public class Gunner : MonoBehaviour
 
     public static void Aim(Vector2 movement)
     {
-        gunner.input = movement;
+        instance.input = movement;
     }
 
     public static void Shoot(bool shooting)
     {
         //audioSource.Play();
-        gunner.isShooting = shooting;
+        instance.isShooting = shooting;
     }
 
     private void FixedUpdate()
     {
         fireRate = (float)SubsystemManager.weaponHealth / 100.0f * fireRateMax;
 
-        if(SubsystemManager.weaponHealth > 75)
+        if (SubsystemManager.weaponHealth > 75)
         {
             fireRate = fireRateMax;
-        } else if (SubsystemManager.weaponHealth > 50)
+        }
+        else if (SubsystemManager.weaponHealth > 50)
         {
             fireRate = 0.75f * fireRateMax;
-        } else if(SubsystemManager.weaponHealth > 0)
+        }
+        else if (SubsystemManager.weaponHealth > 0)
         {
             fireRate = 0.5f * fireRateMax;
-        } else
+        }
+        else
         {
             fireRate = 0;
             fireTimer = 0;
         }
 
-        if(fireTimer > 0 || isShooting)
+        if (fireTimer > 0 || isShooting)
         {
             fireTimer += Time.fixedDeltaTime;
         }
 
-        if(fireRate > 0 && fireTimer >= (1 / fireRate))
+        if (fireRate > 0 && fireTimer >= (1 / fireRate))
         {
-            if(isShooting)
+            if (isShooting)
             {
                 Vector3 shotPos;
-                if(gunner.input == Vector2.zero)
+                if (instance.input == Vector2.zero)
                 {
                     shotPos = transform.up;
-                } else
-                {
-                    shotPos = new Vector3(gunner.input.x, 0, gunner.input.y);
                 }
-                Laser laser = Instantiate(gunner.laser, gunner.gunPosition.position, Quaternion.LookRotation(shotPos, Vector3.up));
-                laser.GetComponent<Weapon>().caster = gunner.GetComponent<Damageable>();
+                else
+                {
+                    shotPos = new Vector3(instance.input.x, 0, instance.input.y);
+                }
+                Laser laser = Instantiate(instance.laser, instance.gunPosition.position, Quaternion.LookRotation(shotPos, Vector3.up));
+                laser.GetComponent<Weapon>().caster = instance.GetComponent<Damageable>();
             }
             fireTimer = 0;
         }
@@ -74,9 +79,9 @@ public class Gunner : MonoBehaviour
     {
         // currently a singleton, but can change if there can be more than one gunner
         audioSource = GetComponent<AudioSource>();
-        if (gunner == null)
+        if (instance == null)
         {
-            gunner = this;
+            instance = this;
             input = new Vector2(0, 0);
         }
         else

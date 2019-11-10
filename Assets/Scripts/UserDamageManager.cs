@@ -26,7 +26,7 @@ public class UserDamageManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -154,7 +154,7 @@ public class UserDamageManager : MonoBehaviour
             OnHit(collisionDamage);
             Destroy(other.gameObject);
         }
-        
+
     }
 
     void OnTriggerExit(Collider other)
