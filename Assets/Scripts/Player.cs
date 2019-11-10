@@ -52,6 +52,8 @@ public class Player : MonoBehaviour
             pilotActionMap.Enable();
             combatActionMap.Enable();
             mode = PlayerMode.PilotMode;
+            cabinMove = Vector2.zero;
+
             ModeManager.ModeSwitch(this, PlayerMode.PilotMode);
         }
 
@@ -62,6 +64,7 @@ public class Player : MonoBehaviour
             gunnerActionMap.Enable();
             combatActionMap.Enable();
             mode = PlayerMode.GunnerMode;
+            cabinMove = Vector2.zero;
             ModeManager.ModeSwitch(this, PlayerMode.GunnerMode);
         }
 
