@@ -6,6 +6,7 @@ public class EnemyDamageable : Damageable
 {
     public int health;
     public int maxHealth = 100;
+    public int killScore = 100;
     private bool destroyed = false;
     AudioSource audioSource;
 
@@ -30,6 +31,7 @@ public class EnemyDamageable : Damageable
                 }
             }
 
+            SubsystemManager.score += killScore;
             gameObject.GetComponent<Renderer>().enabled = false;
             Destroy(this);
             Destroy(gameObject, 1.0f);
