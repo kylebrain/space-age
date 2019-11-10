@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class EnemyLaser : MonoBehaviour
 {
     const float speed = 200;
 

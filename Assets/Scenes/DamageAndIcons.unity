@@ -737,6 +737,7 @@ GameObject:
   m_Component:
   - component: {fileID: 260757233}
   - component: {fileID: 260757232}
+  - component: {fileID: 260757231}
   m_Layer: 0
   m_Name: CombatCamera
   m_TagString: MainCamera
@@ -744,6 +745,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &260757231
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260757230}
+  m_Enabled: 1
 --- !u!20 &260757232
 Camera:
   m_ObjectHideFlags: 0
@@ -3196,6 +3205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb967022ffbbc421a91a86877a4da7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionDamage: 10
 --- !u!54 &1194648119
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5727,12 +5737,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ae0ab18d63c4396a50a524a5aba9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bar1: {fileID: 1762020974}
-  bar2: {fileID: 1610133476}
-  bar3: {fileID: 1795973130}
-  bar4: {fileID: 2066131702}
-  bar5: {fileID: 1175881935}
+  barArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   time: 0
+  overshieldIncrement: 10
 --- !u!1 &1892050602
 GameObject:
   m_ObjectHideFlags: 0
