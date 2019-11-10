@@ -5804,6 +5804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1881794552}
   - component: {fileID: 1881794553}
+  - component: {fileID: 1881794554}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -5837,13 +5838,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 0
-  m_MaxPlayerCount: -1
+  m_NotificationBehavior: 2
+  m_MaxPlayerCount: 2
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1881794554}
+        m_MethodName: OnPlayerJoined
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5869,6 +5881,20 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &1881794554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881794551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0aec10d0d3b7444a80e90e29400314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blueMan: {fileID: 21300000, guid: 809a4a84b932f114b9f434828cba20b4, type: 3}
+  redMan: {fileID: 21300000, guid: f5b3d82f6fb4e42419145015585fcb65, type: 3}
 --- !u!1 &1884763102
 GameObject:
   m_ObjectHideFlags: 0
