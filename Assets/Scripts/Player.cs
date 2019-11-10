@@ -1,14 +1,18 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
     public PlayerMode mode = PlayerMode.CabinMode;
     public bool onPilot = false;
     public bool onGunner = false;
+    public float cabinSpeed = 2000;
+    private Rigidbody playerRigidbody;
+    private Vector2 cabinMove = Vector2.zero;
     //public Pilot pilot;
     private PlayerInput playerInput;
 
@@ -22,6 +26,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Hello world!");
         playerInput = GetComponent<PlayerInput>();
+        playerRigidbody = GetComponent<Rigidbody>();
         cabinActionMap = playerInput.actions.FindActionMap("Cabin");
         pilotActionMap = playerInput.actions.FindActionMap("Pilot");
         gunnerActionMap = playerInput.actions.FindActionMap("Gunner");
@@ -34,7 +39,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        playerRigidbody.velocity = new Vector3(cabinMove.x, 0, cabinMove.y) * cabinSpeed * Time.fixedDeltaTime;
     }
 
     /**** Cabin controls ****/
@@ -67,6 +72,7 @@ public class Player : MonoBehaviour
     public void OnMove(InputValue axis)
     {
         Debug.Log("Moved: " + axis.Get());
+        cabinMove = (Vector2)axis.Get();
     }
 
     /**** Pilot controls ****/
