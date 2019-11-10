@@ -51,15 +51,39 @@ public class UserDamageManager : MonoBehaviour
         switch (roll)
         {
             case shieldChance:
-                SubsystemManager.shieldHealth -= damageAmount;
+                if (SubsystemManager.shieldHealth - damageAmount > 0)
+                {
+                    SubsystemManager.shieldHealth -= damageAmount;
+                }
+
+                else
+                {
+                    SubsystemManager.shieldHealth = 0;
+                }
                 break;
 
             case weaponsChance:
-                SubsystemManager.weaponHealth -= damageAmount;
+                if (SubsystemManager.weaponHealth - damageAmount > 0)
+                {
+                    SubsystemManager.weaponHealth -= damageAmount;
+                }
+
+                else
+                {
+                    SubsystemManager.weaponHealth = 0;
+                }
                 break;
 
             case navigationChance:
-                SubsystemManager.navigationHealth -= damageAmount;
+                if (SubsystemManager.navigationHealth - damageAmount > 0)
+                {
+                    SubsystemManager.navigationHealth -= damageAmount;
+                }
+
+                else
+                {
+                    SubsystemManager.navigationHealth = 0;
+                }
                 break;
         }
 
@@ -88,6 +112,18 @@ public class UserDamageManager : MonoBehaviour
         roll = Random.Range(0, criticalChance);
 
         switch (roll)
+        {
+            case shieldChance:
+                break;
+
+            case weaponsChance:
+                break;
+
+            case navigationChance:
+                break;
+        }
+
+        /*switch (roll)
         {
             case fieldGenerator:
                 if (!SubsystemManager.fieldGeneratorDamaged)
@@ -169,7 +205,7 @@ public class UserDamageManager : MonoBehaviour
                 }
 
                 break;
-        }
+        }*/
     }
 
     void OnTriggerEnter(Collider other)
