@@ -10,7 +10,7 @@ public class Pilot : MonoBehaviour
     public TerrainManager terrainManager;
 
     Vector2 input;
-    float speed = 10.0f;
+    public float speed = 10.0f;
     float turningRate = 180.0f;
     float acceleration = 5.0f;
     float maxSpeed = 50.0f;
