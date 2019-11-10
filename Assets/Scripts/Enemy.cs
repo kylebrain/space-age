@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Laser laser;
+    public EnemyLaser laser;
     public Transform gunPosition;
     public float speed;
     public float stoppingDistance;
@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
                 fireAccumulator -= 1f / fireRate;
                 if (Mathf.Abs(angleDiff) <= 4)
                 {
-                    Laser newLaser = Instantiate(laser, gunPosition.position, Quaternion.LookRotation(transform.up, Vector3.up));
+                    EnemyLaser newLaser = Instantiate(laser, gunPosition.position, Quaternion.LookRotation(transform.up, Vector3.up));
                     newLaser.GetComponent<Weapon>().caster = GetComponent<Damageable>();
                 }
             }

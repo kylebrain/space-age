@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4aef330857f80c41b08d391e513ab18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laser: {fileID: 1233337821479964338, guid: 60cef46608cec454882c6bd51424a795, type: 3}
+  laser: {fileID: -1141720267788891786, guid: e647de9e6d19df546bf24b8e02928823, type: 3}
   gunPosition: {fileID: 4605831509784851619}
   speed: 0
   stoppingDistance: 0
