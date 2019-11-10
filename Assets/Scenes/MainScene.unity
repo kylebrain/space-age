@@ -4685,6 +4685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb967022ffbbc421a91a86877a4da7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endScreen: {fileID: 1247548359}
   collisionDamage: 10
 --- !u!114 &1194648120
 MonoBehaviour:

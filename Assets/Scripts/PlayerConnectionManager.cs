@@ -12,10 +12,22 @@ public class PlayerConnectionManager : MonoBehaviour
     public GameObject startScreen;
 
     private bool lastBlueMan = false;
+    private bool started = false;
+
+    private void Start()
+    {
+        Time.timeScale = 0;
+    }
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
-        startScreen.SetActive(false);
+        if(!started)
+        {
+            startScreen.SetActive(false);
+            started = true;
+            Time.timeScale = 1;
+        }
+        
         playerInput.GetComponent<SpriteRenderer>().sprite = lastBlueMan ? redMan : blueMan;
         lastBlueMan = !lastBlueMan;
     }

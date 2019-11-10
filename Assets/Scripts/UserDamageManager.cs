@@ -28,19 +28,21 @@ public class UserDamageManager : MonoBehaviour
     public const int criticalChance = 6; //(int)((int)9 / .05);
     public const int criticalDamage = 20;
 
+    public GameObject endScreen;
 
+    private static UserDamageManager instance;
 
     public int collisionDamage = 10;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        if(instance == null)
+        {
+            instance = this;
+        } else
+        {
+            Debug.LogError("No more than one UserDamageManager!");
+        }
     }
 
     public static void OnHit(int damageAmount)
@@ -100,6 +102,12 @@ public class UserDamageManager : MonoBehaviour
                 int dif = damageAmount - SubsystemManager.overshieldHealth;
                 SubsystemManager.overshieldHealth = 0;
                 SubsystemManager.mainHealth -= dif;
+
+                if(SubsystemManager.mainHealth <= 0)
+                {
+                    instance.endScreen.SetActive(true);
+                    Time.timeScale = 0;
+                }
             }
         }
 
