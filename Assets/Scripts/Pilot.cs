@@ -11,7 +11,7 @@ public class Pilot : MonoBehaviour
     public Player player = null;
 
     Vector2 input;
-    public float speed = 10.0f;
+    public float speed = 30.0f;
     float turningRate = 180.0f;
     float acceleration = 5.0f;
     float maxSpeed = 50.0f;

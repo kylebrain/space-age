@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        speed = 10.0f;
         stoppingDistance = 20f;
         shootingDistance = 30f;
         fireRate = 1.2f;
@@ -26,6 +25,11 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        speed = Pilot.instance.speed - 10f;
+        if (speed < 2f)
+        {
+            speed = 2f;
+        }
         float angleDiff = Vector3.SignedAngle(transform.up, Pilot.instance.transform.position - transform.position, Vector3.up);
         if (Mathf.Abs(angleDiff) <= turnRate * Time.fixedDeltaTime)
         {
