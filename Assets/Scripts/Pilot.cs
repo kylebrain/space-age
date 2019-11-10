@@ -6,6 +6,7 @@ public class Pilot : MonoBehaviour
 {
     static Pilot pilot = null;
     public Camera PilotCamera;
+    public GameObject CombatBackground;
 
     Vector2 input;
     float speed = 10.0f;
@@ -39,6 +40,9 @@ public class Pilot : MonoBehaviour
         pilot.transform.position += pilot.transform.up * Time.fixedDeltaTime * speed;
         pilot.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime);
         PilotCamera.transform.position = new Vector3(pilot.transform.position.x, PilotCamera.transform.position.y, pilot.transform.position.z);
+        CombatBackground.transform.position = new Vector3(pilot.transform.position.x, CombatBackground.transform.position.y, pilot.transform.position.z);
+        float scrollScalar = 500f;
+        CombatBackground.GetComponent<MeshRenderer>().material.SetTextureOffset("_MainTex", new Vector2(pilot.transform.position.x, pilot.transform.position.z) / scrollScalar);
     }
 
 }
