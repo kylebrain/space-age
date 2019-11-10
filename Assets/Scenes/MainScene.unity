@@ -2563,6 +2563,8 @@ GameObject:
   - component: {fileID: 1194648113}
   - component: {fileID: 1194648114}
   - component: {fileID: 1194648115}
+  - component: {fileID: 1194648117}
+  - component: {fileID: 1194648116}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Untagged
@@ -2663,6 +2665,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laser: {fileID: 1233337821479964338, guid: 60cef46608cec454882c6bd51424a795, type: 3}
   gunPosition: {fileID: 341312555}
+--- !u!65 &1194648116
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194648111}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.59, y: 1.11, z: 0.20000005}
+  m_Center: {x: 0.03, y: 0.91, z: 0}
+--- !u!65 &1194648117
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194648111}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.22, y: 1.87, z: 0.20000005}
+  m_Center: {x: 0.03, y: -0.75, z: 0}
 --- !u!1 &1199678626
 GameObject:
   m_ObjectHideFlags: 0
