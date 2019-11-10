@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pilot : MonoBehaviour
 {
-    static Pilot pilot = null;
+    public static Pilot instance = null;
     public Camera PilotCamera;
     public GameObject CombatBackground;
     public TerrainManager terrainManager;
@@ -18,14 +18,14 @@ public class Pilot : MonoBehaviour
 
     public static void Move(Vector2 movement)
     {
-        pilot.input = movement;
+        instance.input = movement;
     }
 
     void Awake()
     {
-        if (pilot == null)
+        if (instance == null)
         {
-            pilot = this;
+            instance = this;
             input = new Vector2(0, 0);
         }
         else
@@ -38,13 +38,12 @@ public class Pilot : MonoBehaviour
     {
         speed += input.y * acceleration * Time.fixedDeltaTime;
         speed = Mathf.Clamp(speed, minSpeed, maxSpeed);
-        pilot.transform.position += pilot.transform.up * Time.fixedDeltaTime * speed;
-        pilot.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime);
-        PilotCamera.transform.position = new Vector3(pilot.transform.position.x, PilotCamera.transform.position.y, pilot.transform.position.z);
-        CombatBackground.transform.position = new Vector3(pilot.transform.position.x, CombatBackground.transform.position.y, pilot.transform.position.z);
+        instance.transform.position += instance.transform.up * Time.fixedDeltaTime * speed;
+        instance.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime);
+        PilotCamera.transform.position = new Vector3(instance.transform.position.x, PilotCamera.transform.position.y, instance.transform.position.z);
+        CombatBackground.transform.position = new Vector3(instance.transform.position.x, CombatBackground.transform.position.y, instance.transform.position.z);
         float scrollScalar = 500f;
-        CombatBackground.GetComponent<MeshRenderer>().material.SetTextureOffset("_MainTex", new Vector2(pilot.transform.position.x, pilot.transform.position.z) / scrollScalar);
-        terrainManager.OnMove(pilot.transform.position);
+        CombatBackground.GetComponent<MeshRenderer>().material.SetTextureOffset("_MainTex", new Vector2(instance.transform.position.x, instance.transform.position.z) / scrollScalar);
     }
 
 }

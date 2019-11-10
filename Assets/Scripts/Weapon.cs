@@ -5,4 +5,5 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public int damageAmount = 50;
+    public Damageable caster = null;
 }
