@@ -5,16 +5,18 @@ using UnityEngine;
 public class Pilot : MonoBehaviour
 {
     static Pilot pilot = null;
+    public Camera PilotCamera;
 
-    static Vector2 input;
-    static float speed;
-    static float turningRate;
+    Vector2 input;
+    float speed = 10.0f;
+    float turningRate = 180.0f;
+    float acceleration = 5.0f;
+    float maxSpeed = 50.0f;
+    float minSpeed = -5.0f;
+
     public static void Move(Vector2 movement)
     {
-        //pilot.transform.position += new Vector3(0, 0, movement.y) * Time.fixedDeltaTime * 10;
-        //Debug.Log(pilot.transform.position);
-        input = movement;
-        //speed += movement.y;
+        pilot.input = movement;
     }
 
     void Awake()
@@ -22,8 +24,7 @@ public class Pilot : MonoBehaviour
         if (pilot == null)
         {
             pilot = this;
-            speed = 0.0f;
-            turningRate = 0.0f;
+            input = new Vector2(0, 0);
         }
         else
         {
@@ -33,17 +34,11 @@ public class Pilot : MonoBehaviour
 
     void FixedUpdate()
     {
-        speed += input.y * 0.1f;
-        pilot.transform.position += new Vector3(0, 0, speed) * Time.fixedDeltaTime * 10;
+        speed += input.y * acceleration * Time.fixedDeltaTime;
+        speed = Mathf.Clamp(speed, minSpeed, maxSpeed);
+        pilot.transform.position += pilot.transform.up * Time.fixedDeltaTime * speed;
+        pilot.transform.Rotate(0, 0, -input.x * turningRate * Time.fixedDeltaTime);
+        PilotCamera.transform.position = new Vector3(pilot.transform.position.x, PilotCamera.transform.position.y, pilot.transform.position.z);
     }
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
 }
