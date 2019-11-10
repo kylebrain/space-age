@@ -9,11 +9,11 @@ public static class SubsystemManager
     public static int weaponHealth = 100;
     public static int navigationHealth = 100;
     public static int mainHealth = 100;
-    public static int overshieldHealth1 = 0;
-    public static int overshieldHealth2 = 0;
-    public static int overshieldHealth3 = 0;
-    public static int overshieldHealth4 = 0;
-    public static int overshieldHealth5 = 0;
+    public static int overshieldHealth1 = 20;
+    public static int overshieldHealth2 = 20;
+    public static int overshieldHealth3 = 20;
+    public static int overshieldHealth4 = 20;
+    public static int overshieldHealth5 = 20;
 
 
     // Shield Critical Systems

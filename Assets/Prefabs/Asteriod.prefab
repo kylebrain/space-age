@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1377171139609779030}
   - component: {fileID: 1377171139609779031}
+  - component: {fileID: -3359592249631245623}
   m_Layer: 0
   m_Name: Asteriod
   m_TagString: Untagged
@@ -80,3 +81,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!135 &-3359592249631245623
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377171139609779029}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.64
+  m_Center: {x: 0, y: 0, z: 0}

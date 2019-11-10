@@ -29,7 +29,31 @@ public class OvershieldBarController : MonoBehaviour
         bar4.value = SubsystemManager.overshieldHealth4;
         bar5.value = SubsystemManager.overshieldHealth5;
 
-        
+        if (SubsystemManager.overshieldHealth1 < 0)
+        {
+            SubsystemManager.overshieldHealth1 = 0;
+        }
+
+        if (SubsystemManager.overshieldHealth2 < 0)
+        {
+            SubsystemManager.overshieldHealth2 = 0;
+        }
+
+        if (SubsystemManager.overshieldHealth3 < 0)
+        {
+            SubsystemManager.overshieldHealth3 = 0;
+        }
+
+        if (SubsystemManager.overshieldHealth4 < 0)
+        {
+            SubsystemManager.overshieldHealth4 = 0;
+        }
+
+        if (SubsystemManager.overshieldHealth5 < 0)
+        {
+            SubsystemManager.overshieldHealth5 = 0;
+        }
+
         time += Time.deltaTime;
 
         while (time > 1)
