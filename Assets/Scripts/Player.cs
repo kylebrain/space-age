@@ -1,15 +1,19 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
     public PlayerMode mode = PlayerMode.CabinMode;
     public bool onPilot = false;
     public bool onGunner = false;
-    public float cabinSpeed = 40;
+    public float cabinSpeed = 2000;
+    private Rigidbody playerRigidbody;
+    private Vector2 cabinMove = Vector2.zero;
+    //public Pilot pilot;
     private PlayerInput playerInput;
 
     private InputActionMap cabinActionMap;
@@ -17,13 +21,12 @@ public class Player : MonoBehaviour
     private InputActionMap gunnerActionMap;
     private InputActionMap combatActionMap;
 
-    private Vector2 cabinMove = Vector2.zero;
-
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Hello world!");
         playerInput = GetComponent<PlayerInput>();
+        playerRigidbody = GetComponent<Rigidbody>();
         cabinActionMap = playerInput.actions.FindActionMap("Cabin");
         pilotActionMap = playerInput.actions.FindActionMap("Pilot");
         gunnerActionMap = playerInput.actions.FindActionMap("Gunner");
@@ -36,7 +39,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position += new Vector3(cabinMove.x, 0, cabinMove.y) * cabinSpeed * Time.fixedDeltaTime;
+        playerRigidbody.velocity = new Vector3(cabinMove.x, 0, cabinMove.y) * cabinSpeed * Time.fixedDeltaTime;
     }
 
     /**** Cabin controls ****/
@@ -69,13 +72,16 @@ public class Player : MonoBehaviour
     public void OnMove(InputValue axis)
     {
         Debug.Log("Moved: " + axis.Get());
-        cabinMove = (Vector2) axis.Get();
+        cabinMove = (Vector2)axis.Get();
     }
 
     /**** Pilot controls ****/
     public void OnSteer(InputValue axis)
     {
-        Debug.Log("Steered: " + axis.Get());
+        //Debug.Log("Steered: " + axis.Get());
+        //Debug.Log("SteeredX: " + ((Vector2)axis.Get()).x);
+        //Debug.Log("SteeredY: " + ().y);
+        Pilot.Move((Vector2)axis.Get());
     }
 
     /**** Gunner controls ****/
