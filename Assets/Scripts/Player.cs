@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerAnimation))]
+
 public class Player : MonoBehaviour
 {
     public PlayerMode mode = PlayerMode.CabinMode;
@@ -178,6 +179,7 @@ public class Player : MonoBehaviour
         else if (other.gameObject.name == "ShieldCollider")
         {
             onShield = true;
+            //toggleLogos.changeColor();
         }
 
         else if (other.gameObject.name == "WeaponsCollider")
