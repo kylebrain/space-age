@@ -36,12 +36,12 @@ public class TerrainManager : MonoBehaviour
     }
 
 
-    public void OnMove(Vector3 pos)
+    void FixedUpdate()
     {
-        Vector3 diff = pos - prevPos;
-        prevPos = pos;
+        Vector3 diff = Pilot.instance.transform.position - prevPos;
+        prevPos = Pilot.instance.transform.position;
         const int density = 999;
-        if (pos.x + CombatCamera.orthographicSize * (16f / 9f) / 2 > maxX)
+        if (Pilot.instance.transform.position.x + CombatCamera.orthographicSize * (16f / 9f) / 2 > maxX)
         {
             maxX += diff.x;
             int numPoints = (int)(5 * (maxZ - minZ) / CombatCamera.orthographicSize);
@@ -60,7 +60,7 @@ public class TerrainManager : MonoBehaviour
                 }
             }
         }
-        else if (pos.x - CombatCamera.orthographicSize * (16f / 9f) / 2 < minX)
+        else if (Pilot.instance.transform.position.x - CombatCamera.orthographicSize * (16f / 9f) / 2 < minX)
         {
             minX += diff.x;
             int numPoints = (int)(5 * (maxZ - minZ) / CombatCamera.orthographicSize);
@@ -79,7 +79,7 @@ public class TerrainManager : MonoBehaviour
                 }
             }
         }
-        if (pos.z + CombatCamera.orthographicSize > maxZ)
+        if (Pilot.instance.transform.position.z + CombatCamera.orthographicSize > maxZ)
         {
             maxZ += diff.z;
             int numPoints = (int)(5 * (maxX - minX) / (CombatCamera.orthographicSize * (16f / 9f) / 2));
@@ -98,7 +98,7 @@ public class TerrainManager : MonoBehaviour
                 }
             }
         }
-        else if (pos.z - CombatCamera.orthographicSize < minZ)
+        else if (Pilot.instance.transform.position.z - CombatCamera.orthographicSize < minZ)
         {
             minZ += diff.z;
             int numPoints = (int)(5 * (maxX - minX) / (CombatCamera.orthographicSize * (16f / 9f) / 2));
