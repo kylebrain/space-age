@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerAnimation))]
+
 public class Player : MonoBehaviour
 {
     public PlayerMode mode = PlayerMode.CabinMode;
@@ -155,7 +156,7 @@ public class Player : MonoBehaviour
         combatActionMap.Disable();
         cabinActionMap.Enable();
 
-        if(mode == PlayerMode.GunnerMode)
+        if (mode == PlayerMode.GunnerMode)
         {
             Gunner.Shoot(false);
         }
@@ -175,17 +176,18 @@ public class Player : MonoBehaviour
         {
             onGunner = true;
         }
-        else if (other.gameObject.name == "ShieldCollider")
+        else if (other.gameObject.name == "ShieldLogo")
         {
             onShield = true;
+            //toggleLogos.changeColor();
         }
 
-        else if (other.gameObject.name == "WeaponsCollider")
+        else if (other.gameObject.name == "SwordLogo")
         {
             onWeapons = true;
         }
 
-        else if (other.gameObject.name == "NavigationCollider")
+        else if (other.gameObject.name == "RocketLogo")
         {
             onNavigation = true;
         }
@@ -201,17 +203,17 @@ public class Player : MonoBehaviour
         {
             onGunner = false;
         }
-        else if (other.gameObject.name == "ShieldCollider")
+        else if (other.gameObject.name == "ShieldLogo")
         {
             onShield = false;
         }
 
-        else if (other.gameObject.name == "WeaponsCollider")
+        else if (other.gameObject.name == "SwordLogo")
         {
             onWeapons = false;
         }
 
-        else if (other.gameObject.name == "NavigationCollider")
+        else if (other.gameObject.name == "RocketLogo")
         {
             onNavigation = false;
         }

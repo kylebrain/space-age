@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Gunner : MonoBehaviour
 {
+    AudioSource audioSource;
     public Laser laser;
     public Transform gunPosition;
     static Gunner gunner = null;
 
     Vector2 input;
 
-    const float fireRate = 5f;
+    private float fireRate;
+    private const float fireRateMax = 6f;
     private float fireTimer = 0;
     private bool isShooting;
 
@@ -21,17 +23,35 @@ public class Gunner : MonoBehaviour
 
     public static void Shoot(bool shooting)
     {
+        //audioSource.Play();
         gunner.isShooting = shooting;
     }
 
     private void FixedUpdate()
     {
+        fireRate = (float)SubsystemManager.weaponHealth / 100.0f * fireRateMax;
+
+        if(SubsystemManager.weaponHealth > 75)
+        {
+            fireRate = fireRateMax;
+        } else if (SubsystemManager.weaponHealth > 50)
+        {
+            fireRate = 0.75f * fireRateMax;
+        } else if(SubsystemManager.weaponHealth > 0)
+        {
+            fireRate = 0.5f * fireRateMax;
+        } else
+        {
+            fireRate = 0;
+            fireTimer = 0;
+        }
+
         if(fireTimer > 0 || isShooting)
         {
             fireTimer += Time.fixedDeltaTime;
         }
 
-        if(fireTimer >= (1 / fireRate))
+        if(fireRate > 0 && fireTimer >= (1 / fireRate))
         {
             if(isShooting)
             {
@@ -52,6 +72,7 @@ public class Gunner : MonoBehaviour
     private void Awake()
     {
         // currently a singleton, but can change if there can be more than one gunner
+        audioSource = GetComponent<AudioSource>();
         if (gunner == null)
         {
             gunner = this;
