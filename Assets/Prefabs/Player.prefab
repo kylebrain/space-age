@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4344197025588287696}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -1000, z: 0}
+  m_LocalPosition: {x: 0, y: -990, z: 0}
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 809a4a84b932f114b9f434828cba20b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -127,8 +127,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 0
   onPilot: 0
-  flipped: 0
   onGunner: 0
+  onShield: 0
+  onWeapons: 0
+  onNavigation: 0
   cabinSpeed: 2000
 --- !u!136 &6003348923853826731
 CapsuleCollider:
@@ -140,10 +142,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 2
-  m_Height: 4.16
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.55
+  m_Height: 1.43
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.28, z: 1.3}
 --- !u!54 &4405485472326046773
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -158,7 +160,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &-9181279461645579201
 MonoBehaviour:
