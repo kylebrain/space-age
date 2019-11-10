@@ -138,11 +138,13 @@ public class Player : MonoBehaviour
     public void OnAim(InputValue axis)
     {
         //Debug.Log("Aim: " + axis.Get());
+        Gunner.Aim((Vector2)axis.Get());
     }
 
-    public void OnShoot()
+    public void OnShoot(InputValue axis)
     {
-        //Debug.Log("Shot");
+        //Debug.Log("Shot: " + axis.Get());
+        Gunner.Shoot((float)axis.Get() > 0);
     }
 
     /**** Combat controls ****/
@@ -152,6 +154,12 @@ public class Player : MonoBehaviour
         gunnerActionMap.Disable();
         combatActionMap.Disable();
         cabinActionMap.Enable();
+
+        if(mode == PlayerMode.GunnerMode)
+        {
+            Gunner.Shoot(false);
+        }
+
         mode = PlayerMode.CabinMode;
         //Debug.Log("Mode switched to Cabin");
         ModeManager.ModeSwitch(this, PlayerMode.CabinMode);
