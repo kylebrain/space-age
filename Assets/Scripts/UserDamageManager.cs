@@ -30,41 +30,34 @@ public class UserDamageManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SubsystemManager.overshieldHealth1++;  
     }
 
-    public static void OnHit()
+    public static void OnHit(int damageAmount)
     {
         // Regular Damage
-        //SubsystemManager.mainHealth -= 10;
 
-        if (SubsystemManager.overshieldHealth5 != 0)
+        if (SubsystemManager.overshieldHealth > 0)
         {
-            SubsystemManager.overshieldHealth5 -= 5;
+            if (SubsystemManager.overshieldHealth >= damageAmount)
+            {
+                SubsystemManager.overshieldHealth -= damageAmount;
+            }
+
+            else
+            {
+                int dif = damageAmount - SubsystemManager.overshieldHealth;
+                SubsystemManager.overshieldHealth = 0;
+                SubsystemManager.mainHealth -= dif;
+            }
         }
 
-        else if (SubsystemManager.overshieldHealth4 != 0)
+        else
         {
-            SubsystemManager.overshieldHealth4 -= 5;
-        }
-
-        else if (SubsystemManager.overshieldHealth3 != 0)
-        {
-            SubsystemManager.overshieldHealth3 -= 5;
-        }
-
-        else if (SubsystemManager.overshieldHealth2 != 0)
-        {
-            SubsystemManager.overshieldHealth2 -= 5;
-        }
-
-        else if (SubsystemManager.overshieldHealth1 != 0)
-        {
-            SubsystemManager.overshieldHealth1 -= 5;
+            SubsystemManager.mainHealth -= damageAmount;
         }
 
         // Critical Hit System
-        int criticalChance = (int)((int)9 / .2);
+        int criticalChance = (int)((int)9 / .05);
         int roll = Random.Range(0, criticalChance);
 
         switch (roll)
@@ -156,7 +149,7 @@ public class UserDamageManager : MonoBehaviour
     {
         if (other.GetComponent<Damageable>() != null)
         {
-            OnHit();
+            OnHit(9);
             Destroy(other.gameObject);
         }
         
@@ -166,4 +159,5 @@ public class UserDamageManager : MonoBehaviour
     {
 
     }
+
 }
